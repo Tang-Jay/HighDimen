@@ -3,7 +3,7 @@
 
 - [2007ShiJ.pdf](https://tang-jay.github.io/resources/HighDimen/2.pdf)
 - [2020ChangJY.pdf](https://tang-jay.github.io/resources/HighDimen/3-1.pdf)
-- [代码下载](codes/2007ShiJian)
+- [代码下载](https://github.com/Tang-Jay/HighDimen/tree/main/codes/2007ShiJian)
 
 ## 模拟结果
 $$Y = X^\mathsf{T}\beta + \epsilon$$

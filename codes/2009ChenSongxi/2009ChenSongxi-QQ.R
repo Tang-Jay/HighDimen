@@ -13,7 +13,8 @@ j = 0
 C = matrix(NA,nsim,length(size))
 colnames(C)=c('c1','c2','c3')
 for(p in size){
-  j  = j + 1
+  j = j + 1
+  f = 0
   for(i in 1:nsim){
     # 估计方程赋值
     Z = matrix(rnorm(n*(p+1),0,1), p+1, n)
@@ -25,9 +26,11 @@ for(p in size){
     lam = lambdaChen(z)
     el = 2*sum( log(1+t(lam)%*%t(z)) )
     mel = (el - p) / sqrt(2*p)
+    if( abs(mel) <= qnorm(0.975)) f = f + 1 
+    
     C[i,j] = mel 
   }
-  cat('n =',n,'p =',p,'完成模拟',nsim,'次\n')
+  cat('n =',n,'p =',p,'覆盖率',f/nsim,'\n')
 }
 write.csv(C, file = paste0('EL',n,p,'.csv'), row.names = FALSE) # 保存数据 
 qas <- qnorm(as)                   # 正态分布的分位数点
