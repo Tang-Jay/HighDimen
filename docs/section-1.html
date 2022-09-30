@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>第 3 章 2022-09-30 | 高维数据</title>
+  <meta name="description" content="第 3 章 2022-09-30 | 高维数据" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="第 3 章 2022-09-30 | 高维数据" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="第 3 章 2022-09-30 | 高维数据" />
+  
+  
+  
+
+<meta name="author" content="唐洁，邹云龙" />
+
+
+<meta name="date" content="2022-09-30" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="section.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">高维研究进程</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> 前言</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#致谢"><i class="fa fa-check"></i><b>1.1</b> 致谢</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#求解lambda数值解"><i class="fa fa-check"></i><b>1.2</b> 求解<span class="math inline">\(\lambda\)</span>数值解</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="section.html"><a href="section.html"><i class="fa fa-check"></i><b>2</b> 2020-09-27</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="section.html"><a href="section.html#模拟结果"><i class="fa fa-check"></i><b>2.1</b> 模拟结果</a></li>
+<li class="chapter" data-level="2.2" data-path="section.html"><a href="section.html#运行代码"><i class="fa fa-check"></i><b>2.2</b> 运行代码</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="section.html"><a href="section.html#覆盖率"><i class="fa fa-check"></i><b>2.2.1</b> 覆盖率</a></li>
+<li class="chapter" data-level="2.2.2" data-path="section.html"><a href="section.html#绘制分位数图"><i class="fa fa-check"></i><b>2.2.2</b> 绘制分位数图</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="section-1.html"><a href="section-1.html"><i class="fa fa-check"></i><b>3</b> 2022-09-30</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="section-1.html"><a href="section-1.html#模拟结果-1"><i class="fa fa-check"></i><b>3.1</b> 模拟结果</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="section-1.html"><a href="section-1.html#调整el与未调整el对比"><i class="fa fa-check"></i><b>3.1.1</b> 调整EL与未调整EL对比</a></li>
+<li class="chapter" data-level="3.1.2" data-path="section-1.html"><a href="section-1.html#调整el在高维中表现"><i class="fa fa-check"></i><b>3.1.2</b> 调整EL在高维中表现</a></li>
+<li class="chapter" data-level="3.1.3" data-path="section-1.html"><a href="section-1.html#未调整el在高维中表现"><i class="fa fa-check"></i><b>3.1.3</b> 未调整EL在高维中表现</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="section-1.html"><a href="section-1.html#运行代码-1"><i class="fa fa-check"></i><b>3.2</b> 运行代码</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">本书由 bookdown 强力驱动</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">高维数据</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="section-1" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">第 3 章</span> 2022-09-30<a href="section-1.html#section-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>根据2007ShiJ，做一个高维线性模型的模拟，其中<span class="math inline">\(X_{ij}\)</span>的取值参考2020ChangJY。</p>
+<ul>
+<li><a href="">2007ShiJ.pdf</a></li>
+<li><a href="">2020ChangJY.pdf</a></li>
+<li><a href="">代码下载</a></li>
+</ul>
+<div id="模拟结果-1" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> 模拟结果<a href="section-1.html#模拟结果-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><span class="math display">\[Y = X^\mathsf{T}\beta + \epsilon\]</span></p>
+<ul>
+<li><p><span class="math inline">\(n\)</span>表示样本个数</p>
+<ul>
+<li><span class="math inline">\(n = 200,400,800\)</span></li>
+</ul></li>
+<li><p><span class="math inline">\(p\)</span>表示样本维数</p>
+<ul>
+<li><span class="math inline">\(p=cn^{index}\)</span></li>
+<li><span class="math inline">\(index=0.16,0.24,0.4\)</span></li>
+<li><span class="math inline">\(c = 3,4,5\)</span></li>
+</ul></li>
+<li><p><span class="math inline">\(X_i \sim N(0,\Sigma_{p}), \Sigma_{p}=(\sigma_{ij})_{p \times p}\)</span></p>
+<ul>
+<li><p><span class="math inline">\(\sigma_{ij}=I(i=j)+0.5I(i \neq j)\)</span></p></li>
+<li><p><span class="math inline">\(I(x \in \omega)= \left\{ \begin{aligned} \nonumber 1,&amp; x \in \omega,\\ 0,&amp;x \notin \omega.\\ \end{aligned} \right.\)</span></p></li>
+</ul></li>
+</ul>
+<div id="调整el与未调整el对比" class="section level3 hasAnchor" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> 调整EL与未调整EL对比<a href="section-1.html#调整el与未调整el对比" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-12-1.png" width="643.2" /><img src="bookdown_files/figure-html/unnamed-chunk-12-2.png" width="643.2" /><img src="bookdown_files/figure-html/unnamed-chunk-12-3.png" width="643.2" /><img src="bookdown_files/figure-html/unnamed-chunk-12-4.png" width="643.2" /><img src="bookdown_files/figure-html/unnamed-chunk-12-5.png" width="643.2" /><img src="bookdown_files/figure-html/unnamed-chunk-12-6.png" width="643.2" /><img src="bookdown_files/figure-html/unnamed-chunk-12-7.png" width="643.2" /><img src="bookdown_files/figure-html/unnamed-chunk-12-8.png" width="643.2" /><img src="bookdown_files/figure-html/unnamed-chunk-12-9.png" width="643.2" /></p>
+</div>
+<div id="调整el在高维中表现" class="section level3 hasAnchor" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> 调整EL在高维中表现<a href="section-1.html#调整el在高维中表现" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-14-1.png" width="864" /><img src="bookdown_files/figure-html/unnamed-chunk-14-2.png" width="864" /><img src="bookdown_files/figure-html/unnamed-chunk-14-3.png" width="864" /></p>
+</div>
+<div id="未调整el在高维中表现" class="section level3 hasAnchor" number="3.1.3">
+<h3><span class="header-section-number">3.1.3</span> 未调整EL在高维中表现<a href="section-1.html#未调整el在高维中表现" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-16-1.png" width="864" /><img src="bookdown_files/figure-html/unnamed-chunk-16-2.png" width="864" /><img src="bookdown_files/figure-html/unnamed-chunk-16-3.png" width="864" /></p>
+</div>
+</div>
+<div id="运行代码-1" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> 运行代码<a href="section-1.html#运行代码-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="section-1.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#===============================================</span></span>
+<span id="cb4-2"><a href="section-1.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#           High-dim linear model             </span></span>
+<span id="cb4-3"><a href="section-1.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#===============================================</span></span>
+<span id="cb4-4"><a href="section-1.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>()) </span>
+<span id="cb4-5"><a href="section-1.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&#39;MASS&#39;</span>)</span>
+<span id="cb4-6"><a href="section-1.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&#39;GlambdaChen.R&#39;</span>)</span>
+<span id="cb4-7"><a href="section-1.html#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ==================修改参数====================</span></span>
+<span id="cb4-8"><a href="section-1.html#cb4-8" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">=</span> <span class="dv">500</span>                                                </span>
+<span id="cb4-9"><a href="section-1.html#cb4-9" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">400</span></span>
+<span id="cb4-10"><a href="section-1.html#cb4-10" aria-hidden="true" tabindex="-1"></a>index <span class="ot">=</span> <span class="fl">0.2</span></span>
+<span id="cb4-11"><a href="section-1.html#cb4-11" aria-hidden="true" tabindex="-1"></a>c <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)</span>
+<span id="cb4-12"><a href="section-1.html#cb4-12" aria-hidden="true" tabindex="-1"></a>ps <span class="ot">=</span> <span class="fu">round</span>(c<span class="sc">*</span>n<span class="sc">^</span>index)    </span>
+<span id="cb4-13"><a href="section-1.html#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># ==================开始模拟====================</span></span>
+<span id="cb4-14"><a href="section-1.html#cb4-14" aria-hidden="true" tabindex="-1"></a>EL <span class="ot">=</span> <span class="fu">matrix</span>(<span class="cn">NA</span>,nsim,<span class="fu">length</span>(ps))</span>
+<span id="cb4-15"><a href="section-1.html#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(EL)<span class="ot">=</span><span class="fu">c</span>(<span class="fu">paste0</span>(<span class="st">&#39;p=&#39;</span>,ps[<span class="dv">1</span>]),ps[<span class="dv">2</span>],ps[<span class="dv">3</span>])</span>
+<span id="cb4-16"><a href="section-1.html#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="section-1.html#cb4-17" aria-hidden="true" tabindex="-1"></a>MEL <span class="ot">=</span> <span class="fu">matrix</span>(<span class="cn">NA</span>,nsim,<span class="fu">length</span>(ps))</span>
+<span id="cb4-18"><a href="section-1.html#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(MEL)<span class="ot">=</span><span class="fu">c</span>(ps[<span class="dv">1</span>],ps[<span class="dv">2</span>],ps[<span class="dv">3</span>])</span>
+<span id="cb4-19"><a href="section-1.html#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="section-1.html#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&#39;nsim =&#39;</span>,nsim,<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb4-21"><a href="section-1.html#cb4-21" aria-hidden="true" tabindex="-1"></a>j <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb4-22"><a href="section-1.html#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(p <span class="cf">in</span> ps){</span>
+<span id="cb4-23"><a href="section-1.html#cb4-23" aria-hidden="true" tabindex="-1"></a>  j  <span class="ot">=</span> j <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb4-24"><a href="section-1.html#cb4-24" aria-hidden="true" tabindex="-1"></a>  f1 <span class="ot">=</span> <span class="dv">0</span> </span>
+<span id="cb4-25"><a href="section-1.html#cb4-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-26"><a href="section-1.html#cb4-26" aria-hidden="true" tabindex="-1"></a>  mu <span class="ot">=</span> <span class="fu">rep</span>(<span class="dv">0</span>,p)</span>
+<span id="cb4-27"><a href="section-1.html#cb4-27" aria-hidden="true" tabindex="-1"></a>  Sigma <span class="ot">=</span> <span class="fu">diag</span>(p) </span>
+<span id="cb4-28"><a href="section-1.html#cb4-28" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>p){</span>
+<span id="cb4-29"><a href="section-1.html#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span>(l <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>p){</span>
+<span id="cb4-30"><a href="section-1.html#cb4-30" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span>(k <span class="sc">!=</span> l){Sigma[k,l] <span class="ot">=</span> <span class="fl">0.5</span>}</span>
+<span id="cb4-31"><a href="section-1.html#cb4-31" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-32"><a href="section-1.html#cb4-32" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-33"><a href="section-1.html#cb4-33" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-34"><a href="section-1.html#cb4-34" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){ </span>
+<span id="cb4-35"><a href="section-1.html#cb4-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 估计方程赋值</span></span>
+<span id="cb4-36"><a href="section-1.html#cb4-36" aria-hidden="true" tabindex="-1"></a>    X <span class="ot">=</span> <span class="fu">mvrnorm</span>(n,mu,Sigma)</span>
+<span id="cb4-37"><a href="section-1.html#cb4-37" aria-hidden="true" tabindex="-1"></a>    e <span class="ot">=</span> <span class="fu">rnorm</span>(n)    </span>
+<span id="cb4-38"><a href="section-1.html#cb4-38" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Y = X%*%theta + e</span></span>
+<span id="cb4-39"><a href="section-1.html#cb4-39" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">=</span> X<span class="sc">*</span>e</span>
+<span id="cb4-40"><a href="section-1.html#cb4-40" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-41"><a href="section-1.html#cb4-41" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 计算MEL值</span></span>
+<span id="cb4-42"><a href="section-1.html#cb4-42" aria-hidden="true" tabindex="-1"></a>    lam <span class="ot">=</span> <span class="fu">lambdaChen</span>(z)                                     </span>
+<span id="cb4-43"><a href="section-1.html#cb4-43" aria-hidden="true" tabindex="-1"></a>    el <span class="ot">=</span> <span class="dv">2</span><span class="sc">*</span><span class="fu">sum</span>(<span class="fu">log</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">t</span>(lam)<span class="sc">%*%</span><span class="fu">t</span>(z))) </span>
+<span id="cb4-44"><a href="section-1.html#cb4-44" aria-hidden="true" tabindex="-1"></a>    mel <span class="ot">=</span> (el<span class="sc">-</span>p)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">2</span><span class="sc">*</span>p)</span>
+<span id="cb4-45"><a href="section-1.html#cb4-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">abs</span>(mel)<span class="sc">&lt;=</span><span class="fu">qnorm</span>(<span class="fl">0.975</span>)) f1 <span class="ot">=</span> f1 <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb4-46"><a href="section-1.html#cb4-46" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-47"><a href="section-1.html#cb4-47" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 检验lam</span></span>
+<span id="cb4-48"><a href="section-1.html#cb4-48" aria-hidden="true" tabindex="-1"></a>    <span class="co"># aa=1+t(lam)%*%t(z)</span></span>
+<span id="cb4-49"><a href="section-1.html#cb4-49" aria-hidden="true" tabindex="-1"></a>    <span class="co"># glam=rowSums(t(z)/matrix(aa,p,n,byrow = TRUE))</span></span>
+<span id="cb4-50"><a href="section-1.html#cb4-50" aria-hidden="true" tabindex="-1"></a>    <span class="co"># cat(m,max(abs(glam)),&#39;\n&#39;)  </span></span>
+<span id="cb4-51"><a href="section-1.html#cb4-51" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-52"><a href="section-1.html#cb4-52" aria-hidden="true" tabindex="-1"></a>    EL[i,j]  <span class="ot">=</span>  el </span>
+<span id="cb4-53"><a href="section-1.html#cb4-53" aria-hidden="true" tabindex="-1"></a>    MEL[i,j] <span class="ot">=</span> mel </span>
+<span id="cb4-54"><a href="section-1.html#cb4-54" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-55"><a href="section-1.html#cb4-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&#39;n =&#39;</span>,n,<span class="st">&#39;p =&#39;</span>,p,<span class="st">&#39;覆盖率&#39;</span>,f1<span class="sc">/</span>nsim,<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb4-56"><a href="section-1.html#cb4-56" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-57"><a href="section-1.html#cb4-57" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>( EL, <span class="at">file =</span> <span class="fu">paste0</span>(<span class="st">&#39;EL&#39;</span> ,n,index,<span class="st">&#39;.csv&#39;</span>), <span class="at">row.names =</span> <span class="cn">FALSE</span>) <span class="co"># 保存数据 </span></span>
+<span id="cb4-58"><a href="section-1.html#cb4-58" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(MEL, <span class="at">file =</span> <span class="fu">paste0</span>(<span class="st">&#39;MEL&#39;</span>,n,index,<span class="st">&#39;.csv&#39;</span>), <span class="at">row.names =</span> <span class="cn">FALSE</span>) <span class="co"># 保存数据</span></span>
+<span id="cb4-59"><a href="section-1.html#cb4-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-60"><a href="section-1.html#cb4-60" aria-hidden="true" tabindex="-1"></a><span class="co"># ===================绘制QQ图====================</span></span>
+<span id="cb4-61"><a href="section-1.html#cb4-61" aria-hidden="true" tabindex="-1"></a>m <span class="ot">=</span> <span class="dv">50</span>                                <span class="co"># 分位数个数</span></span>
+<span id="cb4-62"><a href="section-1.html#cb4-62" aria-hidden="true" tabindex="-1"></a>as <span class="ot">=</span> (<span class="dv">1</span><span class="sc">:</span>m<span class="fl">-0.5</span>)<span class="sc">/</span>m                      <span class="co"># 名义水平</span></span>
+<span id="cb4-63"><a href="section-1.html#cb4-63" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb4-64"><a href="section-1.html#cb4-64" aria-hidden="true" tabindex="-1"></a><span class="co"># 绘制正态QQ图</span></span>
+<span id="cb4-65"><a href="section-1.html#cb4-65" aria-hidden="true" tabindex="-1"></a>qas <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(as)                      <span class="co"># 正态分布的分位数点</span></span>
+<span id="cb4-66"><a href="section-1.html#cb4-66" aria-hidden="true" tabindex="-1"></a>c1 <span class="ot">=</span> <span class="fu">sort</span>(MEL[,<span class="dv">1</span>])[<span class="fu">ceiling</span>(as<span class="sc">*</span>nsim)]  <span class="co"># mel的分位数点</span></span>
+<span id="cb4-67"><a href="section-1.html#cb4-67" aria-hidden="true" tabindex="-1"></a>c2 <span class="ot">=</span> <span class="fu">sort</span>(MEL[,<span class="dv">2</span>])[<span class="fu">ceiling</span>(as<span class="sc">*</span>nsim)]</span>
+<span id="cb4-68"><a href="section-1.html#cb4-68" aria-hidden="true" tabindex="-1"></a>c3 <span class="ot">=</span> <span class="fu">sort</span>(MEL[,<span class="dv">3</span>])[<span class="fu">ceiling</span>(as<span class="sc">*</span>nsim)]</span>
+<span id="cb4-69"><a href="section-1.html#cb4-69" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(qas,qas,<span class="at">xaxs =</span> <span class="st">&#39;i&#39;</span>, <span class="at">yaxs =</span> <span class="st">&#39;i&#39;</span>,</span>
+<span id="cb4-70"><a href="section-1.html#cb4-70" aria-hidden="true" tabindex="-1"></a>     <span class="at">yaxt =</span> <span class="st">&#39;n&#39;</span>, <span class="at">ann =</span> F, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>)</span>
+<span id="cb4-71"><a href="section-1.html#cb4-71" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">2</span>, <span class="at">las =</span> <span class="dv">1</span>)</span>
+<span id="cb4-72"><a href="section-1.html#cb4-72" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&#39;Norm n = &#39;</span>,n,<span class="st">&#39; index = &#39;</span>,index),</span>
+<span id="cb4-73"><a href="section-1.html#cb4-73" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">&#39;Normal quantile&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;MEL quantile&#39;</span>)</span>
+<span id="cb4-74"><a href="section-1.html#cb4-74" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(qas,c1,<span class="at">type=</span><span class="st">&#39;l&#39;</span>,<span class="at">lty=</span><span class="dv">1</span>,<span class="at">lwd=</span><span class="fl">1.5</span>,<span class="at">col=</span><span class="st">&#39;blue1&#39;</span>)</span>
+<span id="cb4-75"><a href="section-1.html#cb4-75" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(qas,c2,<span class="at">type=</span><span class="st">&#39;l&#39;</span>,<span class="at">lty=</span><span class="dv">3</span>,<span class="at">lwd=</span><span class="fl">1.5</span>,<span class="at">col=</span><span class="st">&#39;aquamarine4&#39;</span>)</span>
+<span id="cb4-76"><a href="section-1.html#cb4-76" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(qas,c3,<span class="at">type=</span><span class="st">&#39;l&#39;</span>,<span class="at">lty=</span><span class="dv">5</span>,<span class="at">lwd=</span><span class="fl">1.5</span>,<span class="at">col=</span><span class="st">&#39;brown2&#39;</span>)</span>
+<span id="cb4-77"><a href="section-1.html#cb4-77" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="fu">qnorm</span>(<span class="fl">0.95</span>),<span class="fu">qnorm</span>(<span class="fl">0.95</span>),<span class="at">pch=</span><span class="dv">5</span>)</span>
+<span id="cb4-78"><a href="section-1.html#cb4-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-79"><a href="section-1.html#cb4-79" aria-hidden="true" tabindex="-1"></a><span class="co"># 绘制卡方QQ图</span></span>
+<span id="cb4-80"><a href="section-1.html#cb4-80" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">120</span>,<span class="dv">5</span>)                     <span class="co"># 卡方的分位数点</span></span>
+<span id="cb4-81"><a href="section-1.html#cb4-81" aria-hidden="true" tabindex="-1"></a>c1 <span class="ot">=</span> <span class="fu">sort</span>(EL[,<span class="dv">1</span>])[<span class="fu">ceiling</span>(as<span class="sc">*</span>nsim)]    <span class="co"># mel的分位数点</span></span>
+<span id="cb4-82"><a href="section-1.html#cb4-82" aria-hidden="true" tabindex="-1"></a>c2 <span class="ot">=</span> <span class="fu">sort</span>(EL[,<span class="dv">2</span>])[<span class="fu">ceiling</span>(as<span class="sc">*</span>nsim)]</span>
+<span id="cb4-83"><a href="section-1.html#cb4-83" aria-hidden="true" tabindex="-1"></a>c3 <span class="ot">=</span> <span class="fu">sort</span>(EL[,<span class="dv">3</span>])[<span class="fu">ceiling</span>(as<span class="sc">*</span>nsim)]</span>
+<span id="cb4-84"><a href="section-1.html#cb4-84" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,x,<span class="at">xaxs =</span> <span class="st">&#39;i&#39;</span>, <span class="at">yaxs =</span> <span class="st">&#39;i&#39;</span>,</span>
+<span id="cb4-85"><a href="section-1.html#cb4-85" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span><span class="fu">c</span>(<span class="fu">min</span>(<span class="fu">qchisq</span>(as,ps[<span class="dv">1</span>])), <span class="fu">max</span>(<span class="fu">qchisq</span>(as,ps[<span class="dv">3</span>]))),</span>
+<span id="cb4-86"><a href="section-1.html#cb4-86" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span><span class="fu">c</span>(<span class="fu">min</span>(<span class="fu">qchisq</span>(as,ps[<span class="dv">1</span>])), <span class="fu">max</span>(<span class="fu">qchisq</span>(as,ps[<span class="dv">3</span>]))),</span>
+<span id="cb4-87"><a href="section-1.html#cb4-87" aria-hidden="true" tabindex="-1"></a>     <span class="at">yaxt =</span> <span class="st">&#39;n&#39;</span>, <span class="at">ann =</span> F, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>)</span>
+<span id="cb4-88"><a href="section-1.html#cb4-88" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">2</span>, <span class="at">las =</span> <span class="dv">1</span>)</span>
+<span id="cb4-89"><a href="section-1.html#cb4-89" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&#39;ChiS n = &#39;</span>,n,<span class="st">&#39; index = &#39;</span>,index),</span>
+<span id="cb4-90"><a href="section-1.html#cb4-90" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">&#39;ChiSquare quantile&#39;</span>, <span class="at">ylab =</span> <span class="st">&#39;EL quantile&#39;</span>)</span>
+<span id="cb4-91"><a href="section-1.html#cb4-91" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">qchisq</span>(as,ps[<span class="dv">1</span>]),c1,<span class="at">type=</span><span class="st">&#39;l&#39;</span>,<span class="at">lty=</span><span class="dv">1</span>,<span class="at">lwd=</span><span class="fl">1.5</span>,<span class="at">col=</span><span class="st">&#39;blue1&#39;</span>)</span>
+<span id="cb4-92"><a href="section-1.html#cb4-92" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">qchisq</span>(as,ps[<span class="dv">2</span>]),c2,<span class="at">type=</span><span class="st">&#39;l&#39;</span>,<span class="at">lty=</span><span class="dv">3</span>,<span class="at">lwd=</span><span class="fl">1.5</span>,<span class="at">col=</span><span class="st">&#39;aquamarine4&#39;</span>)</span>
+<span id="cb4-93"><a href="section-1.html#cb4-93" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">qchisq</span>(as,ps[<span class="dv">3</span>]),c3,<span class="at">type=</span><span class="st">&#39;l&#39;</span>,<span class="at">lty=</span><span class="dv">5</span>,<span class="at">lwd=</span><span class="fl">1.5</span>,<span class="at">col=</span><span class="st">&#39;brown2&#39;</span>)</span>
+<span id="cb4-94"><a href="section-1.html#cb4-94" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="fu">qchisq</span>(<span class="fl">0.95</span>,ps[<span class="dv">1</span>]),<span class="fu">qchisq</span>(<span class="fl">0.95</span>,ps[<span class="dv">1</span>]),<span class="at">pch=</span><span class="dv">5</span>,<span class="at">col=</span><span class="st">&#39;blue1&#39;</span>)</span>
+<span id="cb4-95"><a href="section-1.html#cb4-95" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="fu">qchisq</span>(<span class="fl">0.95</span>,ps[<span class="dv">2</span>]),<span class="fu">qchisq</span>(<span class="fl">0.95</span>,ps[<span class="dv">2</span>]),<span class="at">pch=</span><span class="dv">5</span>,<span class="at">col=</span><span class="st">&#39;aquamarine4&#39;</span>)</span>
+<span id="cb4-96"><a href="section-1.html#cb4-96" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="fu">qchisq</span>(<span class="fl">0.95</span>,ps[<span class="dv">3</span>]),<span class="fu">qchisq</span>(<span class="fl">0.95</span>,ps[<span class="dv">3</span>]),<span class="at">pch=</span><span class="dv">5</span>,<span class="at">col=</span><span class="st">&#39;brown2&#39;</span>)</span></code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="section.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/yihui/bookdown-chinese/edit/master/02-ShiJ.Rmd",
+"text": "编辑"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown.pdf", "bookdown.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

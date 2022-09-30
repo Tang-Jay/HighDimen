@@ -1,0 +1,89 @@
+---
+title: "高维数据"
+author: "唐洁，邹云龙"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+# url: your book url like https://bookdown.org/yihui/bookdown
+# cover-image: path to the social sharing image like images/cover.jpg
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+# output: html_document
+---
+
+# 前言
+
+高维研究的R笔记。
+
+- [Codes](https://github.com/Tang-Jay/RBook) 
+
+- [Bookdown Online](https://tang-jay.github.io/RBook)
+
+## 致谢
+感谢谢益辉开发的bookdown和模板。
+
+```{r, include=FALSE,eval=FALSE}
+bookdown::render_book()
+```
+
+
+```{r include=FALSE,eval=FALSE}
+bookdown::serve_book()
+```
+
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+
+## 求解$\lambda$数值解
+```{r}
+#===============================================
+#             Chen et al 2008
+#===============================================
+lambdaChen<-function(u){# u为p*n,p是X的维数，n是数据的个数
+  p=dim(u)[2]
+  M=rep(0,p)
+  k=0
+  gama=1
+  tol=1e-11
+  dif=1
+ 
+  R1=rep(0,p)
+  R2=R1%*%t(R1)
+  while(dif>tol && k<=300){
+    # 计算R1、R2
+    aa=1+t(M)%*%t(u)
+    for(i in 1:p){
+      R1[i]=sum(t(u[,i])/aa)
+      for(j in 1:p){
+        R2[i,j]=-sum(u[,i]*u[,j]/aa^2)
+      }
+    }
+    
+    delta=-solve(R2)%*%R1
+    dif=c(sqrt(t(delta)%*%delta))
+    sigma=gama*delta
+    while(min(1+t(M+sigma)%*%t(u))<=0){
+      gama=gama/2
+      sigma=gama*delta
+    }
+    
+    M=M+sigma
+    gama=1/sqrt(k+1)
+    k=k+1
+  }
+  return(M)
+} 
+# 检验
+# lam = lambdaChen(z)
+# aa=1+t(lam)%*%t(z)
+# glam=rowSums(t(z)/matrix(aa,p,n,byrow = TRUE))
+# print(max(abs(glam)))
+```
+
