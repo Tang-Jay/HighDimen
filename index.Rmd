@@ -5,10 +5,10 @@ date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
-# url: your book url like https://bookdown.org/yihui/bookdown
+url: https://tang-jay.github.io/HighDim
 # cover-image: path to the social sharing image like images/cover.jpg
 link-citations: yes
-github-repo: rstudio/bookdown-demo
+github-repo: tang-jay/HighDimen
 # output: html_document
 ---
 
@@ -16,9 +16,9 @@ github-repo: rstudio/bookdown-demo
 
 高维研究的R笔记。
 
-- [Codes](https://github.com/Tang-Jay/RBook) 
+- [Codes](https://github.com/Tang-Jay/HighDimen) 
 
-- [Bookdown Online](https://tang-jay.github.io/RBook)
+- [Bookdown Online](https://tang-jay.github.io/HighDimen)
 
 ## 致谢
 感谢谢益辉开发的bookdown和模板。

@@ -1,9 +1,9 @@
 # 2022-09-30
 根据2007ShiJ，做一个高维线性模型的模拟，其中$X_{ij}$的取值参考2020ChangJY。
 
-- [2007ShiJ.pdf]()
-- [2020ChangJY.pdf]()
-- [代码下载]()
+- [2007ShiJ.pdf](https://tang-jay.github.io/resources/HighDimen/2.pdf)
+- [2020ChangJY.pdf](https://tang-jay.github.io/resources/HighDimen/3-1.pdf)
+- [代码下载](codes/2007ShiJian)
 
 ## 模拟结果
 $$Y = X^\mathsf{T}\beta + \epsilon$$
