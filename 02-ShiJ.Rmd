@@ -1,9 +1,9 @@
 # 2022-09-30
-根据2007ShiJ，做一个高维线性模型的模拟，其中$X_{ij}$的取值参考2020ChangJY。
+根据2007ShiJian，做一个高维线性模型的模拟，其中$X_{ij}$的取值参考2020ChangJY。
 
-- [2007ShiJ.pdf](https://tang-jay.github.io/resources/HighDimen/2.pdf)
+- [2007ShiJian.pdf](https://tang-jay.github.io/resources/HighDimen/2.pdf)
 - [2020ChangJY.pdf](https://tang-jay.github.io/resources/HighDimen/3-1.pdf)
-- [代码下载](https://github.com/Tang-Jay/HighDimen/tree/main/codes/2007ShiJian)
+- [代码下载](https://github.com/Tang-Jay/HighDimen/tree/main/codes/2007ShiJianian)
 
 ## 模拟结果
 $$Y = X^\mathsf{T}\beta + \epsilon$$
@@ -28,7 +28,8 @@ $$Y = X^\mathsf{T}\beta + \epsilon$$
 \end{aligned}
 \right.$
 
-### 调整EL与未调整EL对比
+### EL与MEL
+
 ```{r include=FALSE}
 figureQQ <- function(MEL,EL){
   # ===================绘制QQ图====================
@@ -77,14 +78,16 @@ for(n in c(200,400,800)){
   for(index in c(0.16,0.24,0.4)){
     c = c(3,4,5)
     ps = round(c*n^index)
-    MEL = read.csv(paste0('data/2007ShiJ/MEL',n,index,'.csv'))
-    EL = read.csv(paste0('data/2007ShiJ/EL',n,index,'.csv'))
+    MEL = read.csv(paste0('data/2007ShiJian/MEL',n,index,'.csv'))
+    EL = read.csv(paste0('data/2007ShiJian/EL',n,index,'.csv'))
+    # nsim = dim(MEL)[1]
+    nsim = 500
     figureQQ(MEL=MEL,EL=EL)
   }
 }
 ```
 
-### 调整EL在高维中表现
+### MEL 正态
 ```{r include=FALSE}
 
 MEL_figureQQ <- function(MEL){
@@ -111,14 +114,16 @@ for(n in c(200,400,800)){
   for(index in c(0.16,0.24,0.4)){
     c = c(3,4,5)
     ps = round(c*n^index)
-    MEL = read.csv(paste0('data/2007ShiJ/MEL',n,index,'.csv'))
+    MEL = read.csv(paste0('data/2007ShiJian/MEL',n,index,'.csv'))
+    # nsim = dim(MEL)[1]
+    nsim = 500
     MEL_figureQQ(MEL)
   }
 }
 ```
 
 
-### 未调整EL在高维中表现
+### EL 卡方
 ```{r include=FALSE}
 EL_figureQQ <- function(EL){
   # 绘制卡方QQ图
@@ -149,7 +154,9 @@ for(n in c(200,400,800)){
   for(index in c(0.16,0.24,0.4)){
     c = c(3,4,5)
     ps = round(c*n^index)
-    EL = read.csv(paste0('data/2007ShiJ/EL',n,index,'.csv'))
+    EL = read.csv(paste0('data/2007ShiJian/EL',n,index,'.csv'))
+    # nsim = dim(MEL)[1]
+    nsim = 500
     EL_figureQQ(EL)
   }
 }

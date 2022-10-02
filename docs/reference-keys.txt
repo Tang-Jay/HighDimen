@@ -1,6 +1,6 @@
 前言
 致谢
-求解lambda数值解
+lambda数值解
 section
 模拟结果
 运行代码
@@ -8,7 +8,13 @@ section
 绘制分位数图
 section-1
 模拟结果-1
-调整el与未调整el对比
-调整el在高维中表现
-未调整el在高维中表现
+el与mel
+mel-正态
+el-卡方
 运行代码-1
+section-2
+模拟结果-2
+el与mel-1
+mel-正态-1
+el-卡方-1
+运行代码-2
