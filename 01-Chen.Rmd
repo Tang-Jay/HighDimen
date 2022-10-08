@@ -1,5 +1,6 @@
 # 2020-09-27
 
+## 移动模型
 复现2009ChenSX，P716-718分位数图。
 
 - [2009ChenSX.pdf](https://tang-jay.github.io/resources/HighDimen/3.pdf)
@@ -19,6 +20,7 @@ $$X_{ij}=Z_{ij}+\rho Z_{ij+1} \quad (i=1,\cdots,n,\ j=1,\cdots,p)$$
 - $p=c_1n^{0.4}$，$c_1 = 3,4,5$
 - $p=c_2n^{0.24}$，$c_2 = 4,6,8$
 
+### 分位数图
 
 ```{r echo=FALSE, fig.height=3, fig.width=9}
 nsim = 500           # 模拟次数

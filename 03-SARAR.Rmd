@@ -1,13 +1,67 @@
 # 2022-10-01
 
+## 空间模型
 高维EL推广至2021QinYS。
 
-- [2021QinYS.pdf]()
-- [代码下载]()
+- 2021QinYS.pdf
+- 代码下载
 
 ## 模拟结果
 
-### EL与MEL
+### 覆盖率
+
+```{r include=FALSE}
+# ===================修改参数====================
+ns = c(100,400,900)
+indexs = c(0,0.14,0.16,0.24,0.4)
+# ===================定义结果====================
+c = c(3,4,5)
+CPs = matrix(NA,length(indexs)*3,length(ns)*3)
+colnames(CPs) = rep(ns,each=3)
+rownames(CPs) = rep(indexs,each=3)
+# ===================计算覆盖率==================
+i = 0
+for(n in ns){
+  i = i + 3
+  j = 0
+  for(index in indexs){
+    j = j + 3
+    # 计算p
+    ps = round(c*n^index)
+
+    q1 = qchisq(0.95,ps+3)
+    q2 = qnorm(0.975)
+    # 读取数据
+    EL = read.csv(paste0('data/2022QinYongsong/EL',n,index,'.csv'))
+    MEL = read.csv(paste0('data/2022QinYongsong/MEL',n,index,'.csv'))
+    nsim = dim(EL)[1]
+    # 编制分位数矩阵
+    Q1 = matrix(q1,nsim,3,byrow=TRUE)
+    Q2 = matrix(q2,nsim,3)
+    # 计算覆盖率
+    CP1 = colSums(EL<=Q1)/nsim
+    CP2 = colSums(abs(MEL)<=Q2)/nsim
+
+    CPs[(j-2):j,i-2] = ps
+    CPs[(j-2):j,i-1] = CP1
+    CPs[(j-2):j,i  ] = CP2
+  }
+}
+
+# CPs
+```
+
+```{r echo=FALSE, paged.print=TRUE}
+library(kableExtra)
+title = paste0('n=',ns)
+kable(CPs, "html") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F) 
+```
+
+
+
+### 分位数图
+
 ```{r include=FALSE}
 figureQQ <- function(MEL, EL){
 # ===================绘制QQ图====================
@@ -51,8 +105,9 @@ figureQQ <- function(MEL, EL){
 
 
 ```{r echo=FALSE, fig.height=3.7, fig.width=6.7}
+## 绘制EL与MEL对比图
 for(n in c(100,400,900)){
-  for(index in c(0,0.14,0.4)){
+  for(index in c(0,0.24,0.4)){
     c = c(3,4,5)
     ps = round(c*n^index)
     MEL = read.csv(paste0('data/2022QinYongsong/MEL',n,index,'.csv'))
@@ -61,8 +116,8 @@ for(n in c(100,400,900)){
     figureQQ(MEL=MEL,EL=EL)
   }
 }
-
 ```
+
 
 ### MEL 正态
 ```{r include=FALSE}
@@ -90,7 +145,7 @@ MEL_figureQQ <- function(MEL){
 ```{r echo=FALSE, fig.height=3, fig.width=9}
 for(n in c(100,400,900)){
   par(mfrow = c(1, 3))
-  for(index in c(0,0.14,0.4)){
+  for(index in c(0,0.24,0.4)){
     c = c(3,4,5)
     ps = round(c*n^index)
     MEL = read.csv(paste0('data/2022QinYongsong/MEL',n,index,'.csv'))
@@ -129,7 +184,7 @@ EL_figureQQ <- function(EL){
 # 读取运行结果
 for(n in c(100,400,900)){
   par(mfrow = c(1, 3))
-  for(index in c(0,0.14,0.4)){
+  for(index in c(0,0.24,0.4)){
     c = c(3,4,5)
     ps = round(c*n^index)
     EL = read.csv(paste0('data/2022QinYongsong/EL',n,index,'.csv'))

@@ -1,9 +1,11 @@
-# 2022-09-30
+# 2022-09-30 
+
+## 线性模型
 根据2007ShiJian，做一个高维线性模型的模拟，其中$X_{ij}$的取值参考2020ChangJY。
 
 - [2007ShiJian.pdf](https://tang-jay.github.io/resources/HighDimen/2.pdf)
 - [2020ChangJY.pdf](https://tang-jay.github.io/resources/HighDimen/3-1.pdf)
-- [代码下载](https://github.com/Tang-Jay/HighDimen/tree/main/codes/2007ShiJianian)
+
 
 ## 模拟结果
 $$Y = X^\mathsf{T}\beta + \epsilon$$
@@ -28,7 +30,58 @@ $$Y = X^\mathsf{T}\beta + \epsilon$$
 \end{aligned}
 \right.$
 
-### EL与MEL
+### 覆盖率
+
+
+```{r include=FALSE}
+# ===================修改参数====================
+ns = c(200,400,800)
+indexs = c(0.16,0.24,0.4)
+# ===================定义结果====================
+c = c(3,4,5)
+CPs = matrix(NA,length(indexs)*3,length(ns)*3)
+colnames(CPs) = rep(c('p','EL','MEL'),3)
+rownames(CPs) = rep(indexs,each=3)
+# ===================计算覆盖率==================
+i = 0
+for(n in ns){
+  i = i + 3
+  j = 0
+  for(index in indexs){
+    j = j + 3
+    # 计算p
+    ps = round(c*n^index)
+
+    q1 = qchisq(0.95,ps)
+    q2 = qnorm(0.975)
+    # 读取数据
+    EL = read.csv(paste0('data/2007ShiJian/EL',n,index,'.csv'))
+    MEL = read.csv(paste0('data/2007ShiJian/MEL',n,index,'.csv'))
+    nsim = dim(EL)[1]
+    # 编制分位数矩阵
+    Q1 = matrix(q1,nsim,3,byrow=TRUE)
+    Q2 = matrix(q2,nsim,3)
+    # 计算覆盖率
+    CP1 = colSums(EL<=Q1)/nsim
+    CP2 = colSums(abs(MEL)<=Q2)/nsim
+
+    CPs[(j-2):j,i-2] = ps
+    CPs[(j-2):j,i-1] = CP1
+    CPs[(j-2):j,i  ] = CP2
+  }
+}
+
+CPs
+```
+
+```{r echo=FALSE}
+library(kableExtra)
+title = paste0('n=',ns)
+kable(CPs, "html") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F) %>%
+  add_header_above(c(" " = 1, "n = 200" = 3, "n = 400" = 3, "n = 800" = 3))
+```
+### 分位数图
 
 ```{r include=FALSE}
 figureQQ <- function(MEL,EL){

@@ -1,0 +1,100 @@
+# 2022-10-05
+
+探究高维SARAR在不同误差分布下的表现。
+
+
+## 覆盖率
+
+```{r include=FALSE}
+CP <- function(ns,indexs,error){
+  # ===================修改参数====================
+  # error = 1 # 1:N(0,1) 2:N(0,0.75) 3:t(5) 4:chi2(4)
+  # ns = c(100,225,900)
+  # indexs = c(0,0.14,0.16,0.24,0.4)
+  # ===================定义结果====================
+  c = c(3,4,5)
+  CPs = matrix(NA,length(indexs)*3,length(ns)*3)
+  colnames(CPs) = rep(ns,each=3)
+  rownames(CPs) = rep(indexs,each=3)
+  # ===================计算覆盖率==================
+  i = 0
+  for(n in ns){
+    i = i + 3
+    j = 0
+    for(index in indexs){
+      j = j + 3
+      # 计算p
+      ps = round(c*n^index)
+  
+      q1 = qchisq(0.95,ps+3)
+      q2 = qnorm(0.975)
+      # 读取数据
+      EL = read.csv(paste0('data/2022QinYongsong/EL',error,n,index,'.csv'))
+      MEL = read.csv(paste0('data/2022QinYongsong/MEL',error,n,index,'.csv'))
+      nsim = dim(EL)[1]
+      # 编制分位数矩阵
+      Q1 = matrix(q1,nsim,3,byrow=TRUE)
+      Q2 = matrix(q2,nsim,3)
+      # 计算覆盖率
+      CP1 = colSums(EL<=Q1)/nsim
+      CP2 = colSums(abs(MEL)<=Q2)/nsim
+  
+      CPs[(j-2):j,i-2] = ps
+      CPs[(j-2):j,i-1] = CP1
+      CPs[(j-2):j,i  ] = CP2
+    }
+  }
+  
+  return(CPs)
+}
+
+```
+
+```{r include=FALSE}
+library(kableExtra)
+```
+
+### $N(0,1)$误差
+```{r echo=FALSE}
+error = 1
+ns = c(100,400,900)
+indexs = c(0,0.14,0.16,0.24,0.4)
+cp = CP(ns,indexs,error)
+kable(cp, "html") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F) 
+
+```
+
+### $N(0,0.75)$误差
+
+```{r echo=FALSE}
+error = 2
+ns = c(100,400,900)
+indexs = c(0,0.14,0.24,0.4)
+cp = CP(ns,indexs,error)
+kable(cp, "html") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F) 
+```
+### $t(5)$误差
+```{r echo=FALSE}
+error = 3
+ns = c(100,225,900)
+indexs = c(0.14,0.24,0.4)
+cp = CP(ns,indexs,error)
+kable(cp, "html") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F) 
+```
+
+### $\chi^2(4)$误差
+```{r echo=FALSE}
+error = 4
+ns = c(100,225,400)
+indexs = c(0.14,0.24,0.4)
+cp = CP(ns,indexs,error)
+kable(cp, "html") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F) 
+```
+
+## 分位数图
+
+ 
