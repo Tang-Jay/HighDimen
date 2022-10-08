@@ -16,9 +16,11 @@ github-repo: tang-jay/HighDimen
 
 高维研究的R笔记。
 
-- [Codes](https://github.com/Tang-Jay/HighDimen) 
+- [GitHub](https://github.com/Tang-Jay/HighDimen)
 
 - [Bookdown Online](https://tang-jay.github.io/HighDimen)
+
+- [Codes](https://github.com/Tang-Jay/HighDimen/tree/main/codes)
 
 ## 致谢
 感谢谢益辉开发的bookdown和模板。
