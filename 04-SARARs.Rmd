@@ -57,7 +57,7 @@ library(kableExtra)
 - $N(0,1)$误差
 ```{r echo=FALSE}
 ns = c(100,400,900)
-indexs = c(0,0.14,0.24,0.4)
+indexs = c(0,0.14,0.24,0.3,0.4)
 
 error = 1
 cp = CP(ns,indexs,error)
@@ -139,11 +139,11 @@ EL_figureQQ <- function(EL){
 ```
 
 ### $N(0,1)$误差 MEL
-```{r echo=FALSE, fig.height=2.3, fig.width=8}
+```{r echo=FALSE, fig.height=3.2, fig.width=9}
 error = 1
-for(n in ns){
-  par(mfrow = c(1, length(indexs)))
-  for(index in indexs){
+for(index in indexs){
+  par(mfrow = c(1, length(ns)))
+  for(n in ns){
     c = c(3,4,5)
     ps = round(c*n^index)
     MEL = read.csv(paste0('data/2022QinYongsong/MEL',error,n,index,'.csv'))
@@ -157,11 +157,11 @@ for(n in ns){
 
 ### $N(0,1)$误差 EL
 
-```{r echo=FALSE, fig.height=2.3, fig.width=8}
+```{r echo=FALSE, fig.height=3.2, fig.width=9}
 error = 1
-for(n in ns){
-  par(mfrow = c(1, length(indexs)))
-  for(index in indexs){
+for(index in indexs){
+  par(mfrow = c(1, length(ns)))
+  for(n in ns){
     c = c(3,4,5)
     ps = round(c*n^index)
     EL = read.csv(paste0('data/2022QinYongsong/EL',error,n,index,'.csv'))
@@ -173,11 +173,11 @@ for(n in ns){
 
 
 ### $N(0,0.75)$误差 MEL
-```{r echo=FALSE, fig.height=2.3, fig.width=8}
+```{r echo=FALSE, fig.height=3.2, fig.width=9}
 error = 2
-for(n in ns){
-  par(mfrow = c(1, length(indexs)))
-  for(index in indexs){
+for(index in indexs){
+  par(mfrow = c(1, length(ns)))
+  for(n in ns){
     c = c(3,4,5)
     ps = round(c*n^index)
     MEL = read.csv(paste0('data/2022QinYongsong/MEL',error,n,index,'.csv'))
@@ -189,11 +189,11 @@ for(n in ns){
 
 ### $N(0,0.75)$误差 EL
 
-```{r echo=FALSE, fig.height=2.3, fig.width=8}
+```{r echo=FALSE, fig.height=3.2, fig.width=9}
 error = 2
-for(n in ns){
-  par(mfrow = c(1, length(indexs)))
-  for(index in indexs){
+for(index in indexs){
+  par(mfrow = c(1, length(ns)))
+  for(n in ns){
     c = c(3,4,5)
     ps = round(c*n^index)
     EL = read.csv(paste0('data/2022QinYongsong/EL',error,n,index,'.csv'))
@@ -204,11 +204,11 @@ for(n in ns){
 ```
 
 ### $t(5)$误差 MEL
-```{r echo=FALSE, fig.height=2.3, fig.width=8}
+```{r echo=FALSE, fig.height=3.2, fig.width=9}
 error = 3
-for(n in ns){
-  par(mfrow = c(1, length(indexs)))
-  for(index in indexs){
+for(index in indexs){
+  par(mfrow = c(1, length(ns)))
+  for(n in ns){
     c = c(3,4,5)
     ps = round(c*n^index)
     MEL = read.csv(paste0('data/2022QinYongsong/MEL',error,n,index,'.csv'))
@@ -220,11 +220,11 @@ for(n in ns){
 
 ### $t(5)$误差 EL
 
-```{r echo=FALSE, fig.height=2.3, fig.width=8}
+```{r echo=FALSE, fig.height=3.2, fig.width=9}
 error = 3
-for(n in ns){
-  par(mfrow = c(1, length(indexs)))
-  for(index in indexs){
+for(index in indexs){
+  par(mfrow = c(1, length(ns)))
+  for(n in ns){
     c = c(3,4,5)
     ps = round(c*n^index)
     EL = read.csv(paste0('data/2022QinYongsong/EL',error,n,index,'.csv'))
@@ -235,11 +235,11 @@ for(n in ns){
 ```
 
 ### $\chi^2(4)$误差 MEL
-```{r echo=FALSE, fig.height=2.3, fig.width=8}
+```{r echo=FALSE, fig.height=3.2, fig.width=9}
 error = 4
-for(n in ns){
-  par(mfrow = c(1, length(indexs)))
-  for(index in indexs){
+for(index in indexs){
+  par(mfrow = c(1, length(ns)))
+  for(n in ns){
     c = c(3,4,5)
     ps = round(c*n^index)
     MEL = read.csv(paste0('data/2022QinYongsong/MEL',error,n,index,'.csv'))
@@ -251,11 +251,11 @@ for(n in ns){
 
 ### $\chi^2(4)$误差 EL
 
-```{r echo=FALSE, fig.height=2.3, fig.width=8}
+```{r echo=FALSE, fig.height=3.2, fig.width=9}
 error = 4
-for(n in ns){
-  par(mfrow = c(1, length(indexs)))
-  for(index in indexs){
+for(index in indexs){
+  par(mfrow = c(1, length(ns)))
+  for(n in ns){
     c = c(3,4,5)
     ps = round(c*n^index)
     EL = read.csv(paste0('data/2022QinYongsong/EL',error,n,index,'.csv'))
