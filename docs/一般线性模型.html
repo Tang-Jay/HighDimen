@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>第 3 章 一般线性模型 | 高维数据</title>
+  <meta name="description" content="第 3 章 一般线性模型 | 高维数据" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="第 3 章 一般线性模型 | 高维数据" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="tang-jay/HighDimen" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="第 3 章 一般线性模型 | 高维数据" />
+  
+  
+  
+
+<meta name="author" content="唐洁，邹云龙" />
+
+
+<meta name="date" content="2022-10-09" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="移动平均模型.html"/>
+<link rel="next" href="空间模型.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">高维研究进程</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> 前言</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#致谢"><i class="fa fa-check"></i><b>1.1</b> 致谢</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="移动平均模型.html"><a href="移动平均模型.html"><i class="fa fa-check"></i><b>2</b> 移动平均模型</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="移动平均模型.html"><a href="移动平均模型.html#分位数图"><i class="fa fa-check"></i><b>2.1</b> 分位数图</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="一般线性模型.html"><a href="一般线性模型.html"><i class="fa fa-check"></i><b>3</b> 一般线性模型</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="一般线性模型.html"><a href="一般线性模型.html#覆盖率"><i class="fa fa-check"></i><b>3.1</b> 覆盖率</a></li>
+<li class="chapter" data-level="3.2" data-path="一般线性模型.html"><a href="一般线性模型.html#分位数图-1"><i class="fa fa-check"></i><b>3.2</b> 分位数图</a></li>
+<li class="chapter" data-level="3.3" data-path="一般线性模型.html"><a href="一般线性模型.html#mel-正态"><i class="fa fa-check"></i><b>3.3</b> MEL 正态</a></li>
+<li class="chapter" data-level="3.4" data-path="一般线性模型.html"><a href="一般线性模型.html#el-卡方"><i class="fa fa-check"></i><b>3.4</b> EL 卡方</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="空间模型.html"><a href="空间模型.html"><i class="fa fa-check"></i><b>4</b> 空间模型</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="空间模型.html"><a href="空间模型.html#覆盖率-1"><i class="fa fa-check"></i><b>4.1</b> 覆盖率</a></li>
+<li class="chapter" data-level="4.2" data-path="空间模型.html"><a href="空间模型.html#分位数图-2"><i class="fa fa-check"></i><b>4.2</b> 分位数图</a></li>
+<li class="chapter" data-level="4.3" data-path="空间模型.html"><a href="空间模型.html#mel-正态-1"><i class="fa fa-check"></i><b>4.3</b> MEL 正态</a></li>
+<li class="chapter" data-level="4.4" data-path="空间模型.html"><a href="空间模型.html#el-卡方-1"><i class="fa fa-check"></i><b>4.4</b> EL 卡方</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="其他误差sarar.html"><a href="其他误差sarar.html"><i class="fa fa-check"></i><b>5</b> 其他误差SARAR</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="其他误差sarar.html"><a href="其他误差sarar.html#覆盖率-2"><i class="fa fa-check"></i><b>5.1</b> 覆盖率</a></li>
+<li class="chapter" data-level="5.2" data-path="其他误差sarar.html"><a href="其他误差sarar.html#分位数图-3"><i class="fa fa-check"></i><b>5.2</b> 分位数图</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="其他误差sarar.html"><a href="其他误差sarar.html#n01误差-mel"><i class="fa fa-check"></i><b>5.2.1</b> <span class="math inline">\(N(0,1)\)</span>误差 MEL</a></li>
+<li class="chapter" data-level="5.2.2" data-path="其他误差sarar.html"><a href="其他误差sarar.html#n01误差-el"><i class="fa fa-check"></i><b>5.2.2</b> <span class="math inline">\(N(0,1)\)</span>误差 EL</a></li>
+<li class="chapter" data-level="5.2.3" data-path="其他误差sarar.html"><a href="其他误差sarar.html#n00.75误差-mel"><i class="fa fa-check"></i><b>5.2.3</b> <span class="math inline">\(N(0,0.75)\)</span>误差 MEL</a></li>
+<li class="chapter" data-level="5.2.4" data-path="其他误差sarar.html"><a href="其他误差sarar.html#n00.75误差-el"><i class="fa fa-check"></i><b>5.2.4</b> <span class="math inline">\(N(0,0.75)\)</span>误差 EL</a></li>
+<li class="chapter" data-level="5.2.5" data-path="其他误差sarar.html"><a href="其他误差sarar.html#t5误差-mel"><i class="fa fa-check"></i><b>5.2.5</b> <span class="math inline">\(t(5)\)</span>误差 MEL</a></li>
+<li class="chapter" data-level="5.2.6" data-path="其他误差sarar.html"><a href="其他误差sarar.html#t5误差-el"><i class="fa fa-check"></i><b>5.2.6</b> <span class="math inline">\(t(5)\)</span>误差 EL</a></li>
+<li class="chapter" data-level="5.2.7" data-path="其他误差sarar.html"><a href="其他误差sarar.html#chi24误差-mel"><i class="fa fa-check"></i><b>5.2.7</b> <span class="math inline">\(\chi^2(4)\)</span>误差 MEL</a></li>
+<li class="chapter" data-level="5.2.8" data-path="其他误差sarar.html"><a href="其他误差sarar.html#chi24误差-el"><i class="fa fa-check"></i><b>5.2.8</b> <span class="math inline">\(\chi^2(4)\)</span>误差 EL</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">本书由 bookdown 强力驱动</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">高维数据</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="一般线性模型" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">第 3 章</span> 一般线性模型<a href="一般线性模型.html#一般线性模型" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>根据2007ShiJian，做一个高维线性模型的模拟，其中<span class="math inline">\(X_{ij}\)</span>的取值参考2020ChangJY。</p>
+<ul>
+<li><a href="https://tang-jay.github.io/resources/HighDimen/2.pdf">2007ShiJian.pdf</a></li>
+<li><a href="https://tang-jay.github.io/resources/HighDimen/3-1.pdf">2020ChangJY.pdf</a></li>
+</ul>
+<p><span class="math display">\[Y = X^\mathsf{T}\beta + \epsilon\]</span></p>
+<ul>
+<li><p><span class="math inline">\(n\)</span>表示样本个数</p>
+<ul>
+<li><span class="math inline">\(n = 200,400,800\)</span></li>
+</ul></li>
+<li><p><span class="math inline">\(p\)</span>表示样本维数</p>
+<ul>
+<li><span class="math inline">\(p=cn^{index}\)</span></li>
+<li><span class="math inline">\(index=0.16,0.24,0.4\)</span></li>
+<li><span class="math inline">\(c = 3,4,5\)</span></li>
+</ul></li>
+<li><p><span class="math inline">\(X_i \sim N(0,\Sigma_{p}), \Sigma_{p}=(\sigma_{ij})_{p \times p}\)</span></p>
+<ul>
+<li><p><span class="math inline">\(\sigma_{ij}=I(i=j)+0.5I(i \neq j)\)</span></p></li>
+<li><p><span class="math inline">\(I(x \in \omega)= \left\{ \begin{aligned} \nonumber 1,&amp; x \in \omega,\\ 0,&amp;x \notin \omega.\\ \end{aligned} \right.\)</span></p></li>
+</ul></li>
+</ul>
+<div id="覆盖率" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> 覆盖率<a href="一般线性模型.html#覆盖率" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+n = 200
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+n = 400
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+n = 800
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+p
+</th>
+<th style="text-align:center;">
+EL
+</th>
+<th style="text-align:center;">
+MEL
+</th>
+<th style="text-align:center;">
+p
+</th>
+<th style="text-align:center;">
+EL
+</th>
+<th style="text-align:center;">
+MEL
+</th>
+<th style="text-align:center;">
+p
+</th>
+<th style="text-align:center;">
+EL
+</th>
+<th style="text-align:center;">
+MEL
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+0.16
+</td>
+<td style="text-align:center;">
+7
+</td>
+<td style="text-align:center;">
+0.916
+</td>
+<td style="text-align:center;">
+0.924
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+0.934
+</td>
+<td style="text-align:center;">
+0.942
+</td>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+0.928
+</td>
+<td style="text-align:center;">
+0.934
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+0.16
+</td>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+0.894
+</td>
+<td style="text-align:center;">
+0.910
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+0.918
+</td>
+<td style="text-align:center;">
+0.922
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+0.956
+</td>
+<td style="text-align:center;">
+0.956
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+0.16
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+0.870
+</td>
+<td style="text-align:center;">
+0.882
+</td>
+<td style="text-align:center;">
+13
+</td>
+<td style="text-align:center;">
+0.926
+</td>
+<td style="text-align:center;">
+0.938
+</td>
+<td style="text-align:center;">
+15
+</td>
+<td style="text-align:center;">
+0.928
+</td>
+<td style="text-align:center;">
+0.934
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+0.24
+</td>
+<td style="text-align:center;">
+11
+</td>
+<td style="text-align:center;">
+0.862
+</td>
+<td style="text-align:center;">
+0.872
+</td>
+<td style="text-align:center;">
+13
+</td>
+<td style="text-align:center;">
+0.894
+</td>
+<td style="text-align:center;">
+0.910
+</td>
+<td style="text-align:center;">
+15
+</td>
+<td style="text-align:center;">
+0.932
+</td>
+<td style="text-align:center;">
+0.942
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+0.24
+</td>
+<td style="text-align:center;">
+14
+</td>
+<td style="text-align:center;">
+0.822
+</td>
+<td style="text-align:center;">
+0.846
+</td>
+<td style="text-align:center;">
+17
+</td>
+<td style="text-align:center;">
+0.890
+</td>
+<td style="text-align:center;">
+0.904
+</td>
+<td style="text-align:center;">
+20
+</td>
+<td style="text-align:center;">
+0.944
+</td>
+<td style="text-align:center;">
+0.950
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+0.24
+</td>
+<td style="text-align:center;">
+18
+</td>
+<td style="text-align:center;">
+0.786
+</td>
+<td style="text-align:center;">
+0.800
+</td>
+<td style="text-align:center;">
+21
+</td>
+<td style="text-align:center;">
+0.848
+</td>
+<td style="text-align:center;">
+0.866
+</td>
+<td style="text-align:center;">
+25
+</td>
+<td style="text-align:center;">
+0.900
+</td>
+<td style="text-align:center;">
+0.910
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+0.4
+</td>
+<td style="text-align:center;">
+25
+</td>
+<td style="text-align:center;">
+0.620
+</td>
+<td style="text-align:center;">
+0.654
+</td>
+<td style="text-align:center;">
+33
+</td>
+<td style="text-align:center;">
+0.716
+</td>
+<td style="text-align:center;">
+0.752
+</td>
+<td style="text-align:center;">
+43
+</td>
+<td style="text-align:center;">
+0.878
+</td>
+<td style="text-align:center;">
+0.888
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+0.4
+</td>
+<td style="text-align:center;">
+33
+</td>
+<td style="text-align:center;">
+0.428
+</td>
+<td style="text-align:center;">
+0.488
+</td>
+<td style="text-align:center;">
+44
+</td>
+<td style="text-align:center;">
+0.526
+</td>
+<td style="text-align:center;">
+0.582
+</td>
+<td style="text-align:center;">
+58
+</td>
+<td style="text-align:center;">
+0.684
+</td>
+<td style="text-align:center;">
+0.736
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+0.4
+</td>
+<td style="text-align:center;">
+42
+</td>
+<td style="text-align:center;">
+0.188
+</td>
+<td style="text-align:center;">
+0.218
+</td>
+<td style="text-align:center;">
+55
+</td>
+<td style="text-align:center;">
+0.412
+</td>
+<td style="text-align:center;">
+0.474
+</td>
+<td style="text-align:center;">
+72
+</td>
+<td style="text-align:center;">
+0.546
+</td>
+<td style="text-align:center;">
+0.624
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="分位数图-1" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> 分位数图<a href="一般线性模型.html#分位数图-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-10-1.png" width="643.2" /><img src="bookdown_files/figure-html/unnamed-chunk-10-2.png" width="643.2" /><img src="bookdown_files/figure-html/unnamed-chunk-10-3.png" width="643.2" /><img src="bookdown_files/figure-html/unnamed-chunk-10-4.png" width="643.2" /><img src="bookdown_files/figure-html/unnamed-chunk-10-5.png" width="643.2" /><img src="bookdown_files/figure-html/unnamed-chunk-10-6.png" width="643.2" /><img src="bookdown_files/figure-html/unnamed-chunk-10-7.png" width="643.2" /><img src="bookdown_files/figure-html/unnamed-chunk-10-8.png" width="643.2" /><img src="bookdown_files/figure-html/unnamed-chunk-10-9.png" width="643.2" /></p>
+</div>
+<div id="mel-正态" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> MEL 正态<a href="一般线性模型.html#mel-正态" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-12-1.png" width="864" /><img src="bookdown_files/figure-html/unnamed-chunk-12-2.png" width="864" /><img src="bookdown_files/figure-html/unnamed-chunk-12-3.png" width="864" /></p>
+</div>
+<div id="el-卡方" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> EL 卡方<a href="一般线性模型.html#el-卡方" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-14-1.png" width="864" /><img src="bookdown_files/figure-html/unnamed-chunk-14-2.png" width="864" /><img src="bookdown_files/figure-html/unnamed-chunk-14-3.png" width="864" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="移动平均模型.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="空间模型.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/yihui/bookdown-chinese/edit/master/02-ShiJ.Rmd",
+"text": "编辑"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown.pdf", "bookdown.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

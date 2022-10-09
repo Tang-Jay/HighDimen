@@ -1,4 +1,4 @@
-# 2022-10-05
+# 其他误差SARAR
 
 探究高维SARAR在不同误差分布下的表现。
 
@@ -54,47 +54,213 @@ CP <- function(ns,indexs,error){
 library(kableExtra)
 ```
 
-### $N(0,1)$误差
+- $N(0,1)$误差
 ```{r echo=FALSE}
-error = 1
 ns = c(100,400,900)
-indexs = c(0,0.14,0.16,0.24,0.4)
+indexs = c(0,0.14,0.24)
+
+error = 1
 cp = CP(ns,indexs,error)
-kable(cp, "html") %>%
+kable(cp, "html", align = 'c') %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F) 
 
 ```
 
-### $N(0,0.75)$误差
+- $N(0,0.75)$误差
 
 ```{r echo=FALSE}
 error = 2
-ns = c(100,400,900)
-indexs = c(0,0.14,0.24,0.4)
 cp = CP(ns,indexs,error)
-kable(cp, "html") %>%
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F) 
-```
-### $t(5)$误差
-```{r echo=FALSE}
-error = 3
-ns = c(100,225,900)
-indexs = c(0.14,0.24,0.4)
-cp = CP(ns,indexs,error)
-kable(cp, "html") %>%
+kable(cp, "html", align = 'c') %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F) 
 ```
 
-### $\chi^2(4)$误差
+- $t(5)$误差
+```{r echo=FALSE}
+error = 3
+cp = CP(ns,indexs,error)
+kable(cp, "html", align = 'c') %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F) 
+```
+
+- $\chi^2(4)$误差
 ```{r echo=FALSE}
 error = 4
-ns = c(100,225,400)
-indexs = c(0.14,0.24,0.4)
 cp = CP(ns,indexs,error)
-kable(cp, "html") %>%
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F) 
+kable(cp, "html", align = 'c') %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive","bordered"), full_width = F) 
 ```
 
 ## 分位数图
 
- 
+```{r include=FALSE}
+MEL_figureQQ <- function(MEL){
+  m = 50                                # 分位数个数
+  as = (1:m-0.5)/m                      # 名义水平
+  # 绘制正态QQ图
+  qas <- qnorm(as)                      # 正态分布的分位数点
+  c1 = sort(MEL[,1])[ceiling(as*nsim)]  # mel的分位数点
+  c2 = sort(MEL[,2])[ceiling(as*nsim)]
+  c3 = sort(MEL[,3])[ceiling(as*nsim)]
+  plot(qas,qas,xaxs = 'i', yaxs = 'i',
+       yaxt = 'n', ann = F, type = 'l')
+  axis(2, las = 1)
+  title(main = paste0('Norm n = ',n,' index = ',index),
+        xlab = 'Normal quantile', ylab = 'MEL quantile')
+  lines(qas,c1,type='l',lty=1,lwd=1.5,col='blue1')
+  lines(qas,c2,type='l',lty=3,lwd=1.5,col='aquamarine4')
+  lines(qas,c3,type='l',lty=5,lwd=1.5,col='brown2')
+  points(qnorm(0.95),qnorm(0.95),pch=5)
+}
+```
+
+
+```{r include=FALSE}
+EL_figureQQ <- function(EL){
+  # 绘制卡方QQ图
+  qas <- seq(0,120,5)                     # 卡方的分位数点
+  c1 = sort(EL[,1])[ceiling(as*nsim)]    # mel的分位数点
+  c2 = sort(EL[,2])[ceiling(as*nsim)]
+  c3 = sort(EL[,3])[ceiling(as*nsim)]
+  plot(qas,qas,xaxs = 'i', yaxs = 'i',
+       xlim =c(min(qchisq(as,ps[1]+3)), max(qchisq(as,ps[3]+3))),
+       ylim =c(min(qchisq(as,ps[1]+3)), max(qchisq(as,ps[3]+3))),
+       yaxt = 'n', ann = F, type = 'l')
+  axis(2, las = 1)
+  title(main = paste0('ChiS n = ',n,' index = ',index),
+        xlab = 'ChiSquare quantile', ylab = 'EL quantile')
+  lines(qchisq(as,ps[1]+3),c1,type='l',lty=1,lwd=1.5,col='blue1')
+  lines(qchisq(as,ps[2]+3),c2,type='l',lty=3,lwd=1.5,col='aquamarine4')
+  lines(qchisq(as,ps[3]+3),c3,type='l',lty=5,lwd=1.5,col='brown2')
+  points(qchisq(0.95,ps[1]+3),qchisq(0.95,ps[1]+3),pch=5,col='blue1')
+  points(qchisq(0.95,ps[2]+3),qchisq(0.95,ps[2]+3),pch=5,col='aquamarine4')
+  points(qchisq(0.95,ps[3]+3),qchisq(0.95,ps[3]+3),pch=5,col='brown2')
+}
+```
+
+### $N(0,1)$误差 MEL
+```{r echo=FALSE, fig.height=3, fig.width=9}
+error = 1
+for(n in ns){
+  par(mfrow = c(1, length(indexs)))
+  for(index in indexs){
+    c = c(3,4,5)
+    ps = round(c*n^index)
+    MEL = read.csv(paste0('data/2022QinYongsong/MEL',error,n,index,'.csv'))
+    nsim = dim(MEL)[1]
+    MEL_figureQQ(MEL)
+  }
+}
+```
+
+
+
+### $N(0,1)$误差 EL
+
+```{r echo=FALSE, fig.height=3, fig.width=9}
+error = 1
+for(n in ns){
+  par(mfrow = c(1, length(indexs)))
+  for(index in indexs){
+    c = c(3,4,5)
+    ps = round(c*n^index)
+    EL = read.csv(paste0('data/2022QinYongsong/EL',error,n,index,'.csv'))
+    nsim = dim(EL)[1]
+    EL_figureQQ(EL)
+  }
+}
+```
+
+
+### $N(0,0.75)$误差 MEL
+```{r echo=FALSE, fig.height=3, fig.width=9}
+error = 2
+for(n in ns){
+  par(mfrow = c(1, length(indexs)))
+  for(index in indexs){
+    c = c(3,4,5)
+    ps = round(c*n^index)
+    MEL = read.csv(paste0('data/2022QinYongsong/MEL',error,n,index,'.csv'))
+    nsim = dim(MEL)[1]
+    MEL_figureQQ(MEL)
+  }
+}
+```
+
+### $N(0,0.75)$误差 EL
+
+```{r echo=FALSE, fig.height=3, fig.width=9}
+error = 2
+for(n in ns){
+  par(mfrow = c(1, length(indexs)))
+  for(index in indexs){
+    c = c(3,4,5)
+    ps = round(c*n^index)
+    EL = read.csv(paste0('data/2022QinYongsong/EL',error,n,index,'.csv'))
+    nsim = dim(EL)[1]
+    EL_figureQQ(EL)
+  }
+}
+```
+
+### $t(5)$误差 MEL
+```{r echo=FALSE, fig.height=3, fig.width=9}
+error = 3
+for(n in ns){
+  par(mfrow = c(1, length(indexs)))
+  for(index in indexs){
+    c = c(3,4,5)
+    ps = round(c*n^index)
+    MEL = read.csv(paste0('data/2022QinYongsong/MEL',error,n,index,'.csv'))
+    nsim = dim(MEL)[1]
+    MEL_figureQQ(MEL)
+  }
+}
+```
+
+### $t(5)$误差 EL
+
+```{r echo=FALSE, fig.height=3, fig.width=9}
+error = 3
+for(n in ns){
+  par(mfrow = c(1, length(indexs)))
+  for(index in indexs){
+    c = c(3,4,5)
+    ps = round(c*n^index)
+    EL = read.csv(paste0('data/2022QinYongsong/EL',error,n,index,'.csv'))
+    nsim = dim(EL)[1]
+    EL_figureQQ(EL)
+  }
+}
+```
+
+### $\chi^2(4)$误差 MEL
+```{r echo=FALSE, fig.height=3, fig.width=9}
+error = 4
+for(n in ns){
+  par(mfrow = c(1, length(indexs)))
+  for(index in indexs){
+    c = c(3,4,5)
+    ps = round(c*n^index)
+    MEL = read.csv(paste0('data/2022QinYongsong/MEL',error,n,index,'.csv'))
+    nsim = dim(MEL)[1]
+    MEL_figureQQ(MEL)
+  }
+}
+```
+
+### $\chi^2(4)$误差 EL
+
+```{r echo=FALSE, fig.height=3, fig.width=9}
+error = 4
+for(n in ns){
+  par(mfrow = c(1, length(indexs)))
+  for(index in indexs){
+    c = c(3,4,5)
+    ps = round(c*n^index)
+    EL = read.csv(paste0('data/2022QinYongsong/EL',error,n,index,'.csv'))
+    nsim = dim(EL)[1]
+    EL_figureQQ(EL)
+  }
+}
+``` 
