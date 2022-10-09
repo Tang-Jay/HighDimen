@@ -2,7 +2,7 @@
 复现2009ChenSX，P716-718分位数图。
 
 - [2009ChenSX.pdf](https://tang-jay.github.io/resources/HighDimen/3.pdf)
-- [代码下载](https://github.com/Tang-Jay/HighDimen/tree/main/codes/2009ChenSongxi)
+
 
 
 $\{X_i\}_{i=1}^n \in \mathbb{R}^p$ 是独立同分布随机变量，来自下面的移动平均模型：

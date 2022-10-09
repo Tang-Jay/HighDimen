@@ -2,7 +2,6 @@
 根据2007ShiJian，做一个高维线性模型的模拟，其中$X_{ij}$的取值参考2020ChangJY。
 
 - [2007ShiJian.pdf](https://tang-jay.github.io/resources/HighDimen/2.pdf)
-- [2020ChangJY.pdf](https://tang-jay.github.io/resources/HighDimen/3-1.pdf)
 
 
 
