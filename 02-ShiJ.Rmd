@@ -136,39 +136,6 @@ for(index in c(0,0.16,0.24,0.4)){
 }
 ```
 
-## MEL 正态
-```{r include=FALSE}
-
-MEL_figureQQ <- function(MEL){
-  # 绘制正态QQ图
-  qas <- qnorm(as)                      # 正态分布的分位数点
-  c1 = sort(MEL[,1])[ceiling(as*nsim)]  # mel的分位数点
-  c2 = sort(MEL[,2])[ceiling(as*nsim)]
-  c3 = sort(MEL[,3])[ceiling(as*nsim)]
-  plot(qas,qas,xaxs = 'i', yaxs = 'i',
-       yaxt = 'n', ann = F, type = 'l')
-  axis(2, las = 1)
-  title(main = paste0('Norm n = ',n,' index = ',index),
-        xlab = 'Normal quantile', ylab = 'MEL quantile')
-  lines(qas,c1,type='l',lty=1,lwd=1.5,col='blue1')
-  lines(qas,c2,type='l',lty=3,lwd=1.5,col='aquamarine4')
-  lines(qas,c3,type='l',lty=5,lwd=1.5,col='brown2')
-  points(qnorm(0.95),qnorm(0.95),pch=5)
-}
-```
-
-```{r lm-mel,echo=FALSE, fig.height=3, fig.width=9}
-for(index in c(0,0.16,0.24,0.4)){
-  par(mfrow = c(1, 3))
-  for(n in c(200,400,800)){
-    c = c(3,4,5)
-    ps = round(c*n^index)
-    MEL = read.csv(paste0('data/2007ShiJian/MEL',n,index,'.csv'))
-    nsim = dim(MEL)[1]
-    MEL_figureQQ(MEL)
-  }
-}
-```
 
 
 ## EL 卡方
@@ -210,6 +177,39 @@ for(index in c(0,0.16,0.24,0.4)){
 ```
 
 
+## MEL 正态
+```{r include=FALSE}
+
+MEL_figureQQ <- function(MEL){
+  # 绘制正态QQ图
+  qas <- qnorm(as)                      # 正态分布的分位数点
+  c1 = sort(MEL[,1])[ceiling(as*nsim)]  # mel的分位数点
+  c2 = sort(MEL[,2])[ceiling(as*nsim)]
+  c3 = sort(MEL[,3])[ceiling(as*nsim)]
+  plot(qas,qas,xaxs = 'i', yaxs = 'i',
+       yaxt = 'n', ann = F, type = 'l')
+  axis(2, las = 1)
+  title(main = paste0('Norm n = ',n,' index = ',index),
+        xlab = 'Normal quantile', ylab = 'MEL quantile')
+  lines(qas,c1,type='l',lty=1,lwd=1.5,col='blue1')
+  lines(qas,c2,type='l',lty=3,lwd=1.5,col='aquamarine4')
+  lines(qas,c3,type='l',lty=5,lwd=1.5,col='brown2')
+  points(qnorm(0.95),qnorm(0.95),pch=5)
+}
+```
+
+```{r lm-mel,echo=FALSE, fig.height=3, fig.width=9}
+for(index in c(0,0.16,0.24,0.4)){
+  par(mfrow = c(1, 3))
+  for(n in c(200,400,800)){
+    c = c(3,4,5)
+    ps = round(c*n^index)
+    MEL = read.csv(paste0('data/2007ShiJian/MEL',n,index,'.csv'))
+    nsim = dim(MEL)[1]
+    MEL_figureQQ(MEL)
+  }
+}
+```
 
 
 
