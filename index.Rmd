@@ -17,9 +17,9 @@ github-repo: tang-jay/HighDimen
 高维空间模型研究的R笔记。
 
 
-- [Bookdown Online](https://tang-jay.github.io/HighDimen)
+- [在线浏览](https://tang-jay.github.io/HighDimen)
 
-- [Related Codes](https://github.com/Tang-Jay/HighDimen/tree/main/codes)
+- [相关代码](https://github.com/Tang-Jay/HighDimen/tree/main/codes)
 
 ## 致谢
 感谢[谢益辉](https://yihui.org/cn/vitae/)开发的bookdown写电子书工具。
