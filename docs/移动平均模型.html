@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>第 2 章 移动平均模型 | 高维数据</title>
-  <meta name="description" content="第 2 章 移动平均模型 | 高维数据" />
+  <title>第 2 章 移动平均模型 | 高维空间数据</title>
+  <meta name="description" content="第 2 章 移动平均模型 | 高维空间数据" />
   <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="第 2 章 移动平均模型 | 高维数据" />
+  <meta property="og:title" content="第 2 章 移动平均模型 | 高维空间数据" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="tang-jay/HighDimen" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="第 2 章 移动平均模型 | 高维数据" />
+  <meta name="twitter:title" content="第 2 章 移动平均模型 | 高维空间数据" />
   
   
   
@@ -23,7 +23,7 @@
 <meta name="author" content="唐洁，邹云龙" />
 
 
-<meta name="date" content="2022-10-13" />
+<meta name="date" content="2022-10-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -138,7 +138,7 @@
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">高维数据</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">高维空间数据</a>
           </h1>
         </div>
 
@@ -148,10 +148,7 @@
             <section class="normal" id="section-">
 <div id="移动平均模型" class="section level1 hasAnchor" number="2">
 <h1><span class="header-section-number">第 2 章</span> 移动平均模型<a href="移动平均模型.html#移动平均模型" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>复现2009ChenSX，P716-718分位数图。</p>
-<ul>
-<li><a href="https://tang-jay.github.io/resources/HighDimen/3.pdf">2009ChenSX.pdf</a></li>
-</ul>
+<p>复现<a href="pdfs/Chen.pdf">2009ChenSongxi</a>，第716-718页的分位数图。相关代码<a href="https://github.com/Tang-Jay/HighDimen/tree/main/codes/MA">见此</a>。</p>
 <p><span class="math inline">\(\{X_i\}_{i=1}^n \in \mathbb{R}^p\)</span> 是独立同分布随机变量，来自下面的移动平均模型：
 <span class="math display">\[X_{ij}=Z_{ij}+\rho Z_{ij+1} \quad (i=1,\cdots,n,\ j=1,\cdots,p)\]</span></p>
 <p>此处，对于任意<span class="math inline">\(i\)</span>，<span class="math inline">\(\{Z_{ij}\}_{j=1}^{p+1}\)</span>是独立随机变量，并且均值为0，方差相同。我们取标准正态误差。</p>

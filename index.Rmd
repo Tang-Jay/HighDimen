@@ -1,5 +1,5 @@
 ---
-title: "高维数据"
+title: "高维空间数据"
 author: "唐洁，邹云龙"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -14,16 +14,15 @@ github-repo: tang-jay/HighDimen
 
 # 前言
 
-高维研究的R笔记。
+高维空间模型研究的R笔记。
 
-- [GitHub](https://github.com/Tang-Jay/HighDimen)
 
 - [Bookdown Online](https://tang-jay.github.io/HighDimen)
 
 - [Related Codes](https://github.com/Tang-Jay/HighDimen/tree/main/codes)
 
 ## 致谢
-感谢谢益辉开发的bookdown和模板。
+感谢[谢益辉](https://yihui.org/cn/vitae/)开发的bookdown写电子书工具。
 
 ```{r, include=FALSE,eval=FALSE}
 bookdown::render_book()

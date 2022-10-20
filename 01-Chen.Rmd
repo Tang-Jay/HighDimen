@@ -1,8 +1,5 @@
 # 移动平均模型
-复现2009ChenSX，P716-718分位数图。
-
-- [2009ChenSX.pdf](https://tang-jay.github.io/resources/HighDimen/3.pdf)
-
+复现[2009ChenSongxi](pdfs/Chen.pdf)，第716-718页的分位数图。相关代码[见此](https://github.com/Tang-Jay/HighDimen/tree/main/codes/MA)。
 
 
 $\{X_i\}_{i=1}^n \in \mathbb{R}^p$ 是独立同分布随机变量，来自下面的移动平均模型：

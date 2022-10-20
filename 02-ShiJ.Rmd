@@ -1,7 +1,7 @@
 # 一般线性模型
-根据2007ShiJian，做一个高维线性模型的模拟，其中$X_{ij}$的取值参考2020ChangJY。
+根据[2007ShiJian](pdfs/Shi.pdf)思想，参考[QinYongsong](pdfs/lm.pdf)给出的计算框架，做一个高维线性模型的模拟，其中$X_{ij}$的取值参考[2020ChangJY](pdfs/Chang.pdf)第13页。相关代码[见此](https://github.com/Tang-Jay/HighDimen/tree/main/codes/LM)。
 
-- [2007ShiJian.pdf](https://tang-jay.github.io/resources/HighDimen/2.pdf)
+
 
 
 
@@ -86,20 +86,6 @@ figureQQ <- function(MEL,EL){
   m = 50                                # 分位数个数
   as = (1:m-0.5)/m                      # 名义水平
   par(mfrow = c(1, 2))
-  # 绘制正态QQ图
-  qas <- qnorm(as)                      # 正态分布的分位数点
-  c1 = sort(MEL[,1])[ceiling(as*nsim)]  # mel的分位数点
-  c2 = sort(MEL[,2])[ceiling(as*nsim)]
-  c3 = sort(MEL[,3])[ceiling(as*nsim)]
-  plot(qas,qas,xaxs = 'i', yaxs = 'i',
-       yaxt = 'n', ann = F, type = 'l')
-  axis(2, las = 1)
-  title(main = paste0('Norm n = ',n,' index = ',index),
-        xlab = 'Normal quantile', ylab = 'MEL quantile')
-  lines(qas,c1,type='l',lty=1,lwd=1.5,col='blue1')
-  lines(qas,c2,type='l',lty=3,lwd=1.5,col='aquamarine4')
-  lines(qas,c3,type='l',lty=5,lwd=1.5,col='brown2')
-  points(qnorm(0.95),qnorm(0.95),pch=5)
   
   # 绘制卡方QQ图
   x <- seq(0,120,5)                     # 卡方的分位数点
@@ -119,6 +105,22 @@ figureQQ <- function(MEL,EL){
   points(qchisq(0.95,ps[1]),qchisq(0.95,ps[1]),pch=5,col='blue1')
   points(qchisq(0.95,ps[2]),qchisq(0.95,ps[2]),pch=5,col='aquamarine4')
   points(qchisq(0.95,ps[3]),qchisq(0.95,ps[3]),pch=5,col='brown2')
+  
+  # 绘制正态QQ图
+  qas <- qnorm(as)                      # 正态分布的分位数点
+  c1 = sort(MEL[,1])[ceiling(as*nsim)]  # mel的分位数点
+  c2 = sort(MEL[,2])[ceiling(as*nsim)]
+  c3 = sort(MEL[,3])[ceiling(as*nsim)]
+  plot(qas,qas,xaxs = 'i', yaxs = 'i',
+       yaxt = 'n', ann = F, type = 'l')
+  axis(2, las = 1)
+  title(main = paste0('Norm n = ',n,' index = ',index),
+        xlab = 'Normal quantile', ylab = 'MEL quantile')
+  lines(qas,c1,type='l',lty=1,lwd=1.5,col='blue1')
+  lines(qas,c2,type='l',lty=3,lwd=1.5,col='aquamarine4')
+  lines(qas,c3,type='l',lty=5,lwd=1.5,col='brown2')
+  points(qnorm(0.95),qnorm(0.95),pch=5)
+  
 }
 ```
 
